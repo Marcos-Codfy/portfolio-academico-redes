@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Marcos Arruda — Portfólio Acadêmico</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--text-primary: #1d1d1f;
+			--text-secondary: #6e6e73;
+			--bg: #ffffff;
+			--accent: #0071e3;
+			--divider: #d2d2d7;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			background: var(--bg);
+			color: var(--text-primary);
+			line-height: 1.6;
+			-webkit-font-smoothing: antialiased;
+			overflow-x: hidden;
+		}
+
+		/* Navigation */
+		nav {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			background: rgba(255, 255, 255, 0.8);
+			backdrop-filter: blur(20px);
+			border-bottom: 1px solid var(--divider);
+			z-index: 1000;
+			padding: 0 max(20px, env(safe-area-inset-right));
+		}
+
+		nav .nav-content {
+			max-width: 980px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 16px 20px;
+		}
+
+		nav .logo {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: var(--text-primary);
+			letter-spacing: -0.02em;
+		}
+
+		nav ul {
+			display: flex;
+			gap: 32px;
+			list-style: none;
+		}
+
+		nav a {
+			text-decoration: none;
+			color: var(--text-secondary);
+			font-size: 0.875rem;
+			font-weight: 400;
+			transition: color 0.2s;
+		}
+
+		nav a:hover {
+			color: var(--text-primary);
+		}
+
+		/* Hero Section */
+		.hero {
+			margin-top: 60px;
+			padding: 180px 20px 120px;
+			text-align: center;
+			background-image: url('images/image1.png');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			position: relative;
+		}
+
+		.hero::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.65);
+			z-index: 0;
+		}
+
+		.hero>* {
+			position: relative;
+			z-index: 1;
+		}
+
+		.hero .welcome {
+			font-size: clamp(1rem, 2vw, 1.2rem);
+			font-weight: 400;
+			color: rgba(255, 255, 255, 0.9);
+			margin-bottom: 8px;
+		}
+
+		.hero h1 {
+			font-size: clamp(2.5rem, 6vw, 4rem);
+			font-weight: 700;
+			letter-spacing: -0.02em;
+			margin-bottom: 24px;
+			color: #ffffff;
+		}
+
+		.hero .subtitle {
+			font-size: clamp(1rem, 2.5vw, 1.3rem);
+			font-weight: 300;
+			color: rgba(255, 255, 255, 0.85);
+			margin-bottom: 48px;
+		}
+
+		.hero .author {
+			font-size: clamp(1rem, 2vw, 1.15rem);
+			font-weight: 500;
+			color: rgba(255, 255, 255, 0.95);
+		}
+
+		/* Section Base */
+		section {
+			max-width: 980px;
+			margin: 0 auto;
+			padding: 80px 20px;
+		}
+
+		section h2 {
+			font-size: clamp(2rem, 4vw, 2.75rem);
+			font-weight: 600;
+			letter-spacing: -0.02em;
+			margin-bottom: 48px;
+			text-align: center;
+		}
+
+		section h3 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			margin-bottom: 12px;
+			color: var(--text-primary);
+		}
+
+		section p {
+			font-size: 1.05rem;
+			color: var(--text-secondary);
+			line-height: 1.7;
+			margin-bottom: 16px;
+		}
+
+		/* Grid Layout */
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 24px;
+			margin-top: 48px;
+		}
+
+		.card {
+			background: #fafafa;
+			border-radius: 12px;
+			padding: 32px;
+			transition: transform 0.3s, box-shadow 0.3s;
+		}
+
+		.card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+		}
+
+		.card h4 {
+			font-size: 1.25rem;
+			font-weight: 600;
+			margin-bottom: 8px;
+		}
+
+		.card .meta {
+			font-size: 0.9rem;
+			color: var(--text-secondary);
+			margin-bottom: 16px;
+		}
+
+		.card ul {
+			padding-left: 20px;
+			color: var(--text-secondary);
+		}
+
+		.card li {
+			margin-bottom: 8px;
+			font-size: 0.95rem;
+		}
+
+		/* Timeline */
+		.timeline {
+			position: relative;
+			padding-left: 32px;
+			border-left: 2px solid var(--divider);
+			margin-top: 48px;
+		}
+
+		.timeline-item {
+			position: relative;
+			padding-bottom: 48px;
+		}
+
+		.timeline-item::before {
+			content: '';
+			position: absolute;
+			left: -38px;
+			top: 0;
+			width: 12px;
+			height: 12px;
+			background: var(--accent);
+			border-radius: 50%;
+			border: 3px solid white;
+		}
+
+		.timeline-item h4 {
+			font-size: 1.2rem;
+			font-weight: 600;
+			margin-bottom: 4px;
+		}
+
+		.timeline-item .date {
+			font-size: 0.85rem;
+			color: var(--accent);
+			font-weight: 500;
+			margin-bottom: 12px;
+		}
+
+		.timeline-item p {
+			font-size: 0.95rem;
+			line-height: 1.6;
+			color: var(--text-primary);
+		}
+
+		.timeline-item ul,
+		.timeline-item li {
+			color: var(--text-primary);
+		}
+
+		.timeline-img {
+			width: 100%;
+			max-width: 600px;
+			height: auto;
+			border-radius: 8px;
+			margin: 20px 0;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			display: block;
+		}
+
+		/* Divider */
+		.divider {
+			height: 1px;
+			background: var(--divider);
+			margin: 80px auto;
+			max-width: 980px;
+		}
+
+		/* Tags */
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: 16px;
+		}
+
+		.tag {
+			display: inline-block;
+			padding: 6px 12px;
+			background: #f5f5f7;
+			border-radius: 16px;
+			font-size: 0.85rem;
+			color: var(--text-secondary);
+			font-weight: 500;
+		}
+
+		/* Footer */
+		footer {
+			background: #f5f5f7;
+			padding: 60px 20px;
+			text-align: center;
+			border-top: 1px solid var(--divider);
+		}
+
+		footer h3 {
+			font-size: 1.75rem;
+			margin-bottom: 24px;
+		}
+
+		footer .contact-info {
+			display: flex;
+			justify-content: center;
+			gap: 40px;
+			margin-top: 24px;
+			flex-wrap: wrap;
+		}
+
+		footer .contact-info a {
+			color: var(--accent);
+			text-decoration: none;
+			font-size: 1rem;
+			font-weight: 500;
+			transition: opacity 0.2s;
+		}
+
+		footer .contact-info a:hover {
+			opacity: 0.7;
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			nav ul {
+				gap: 16px;
+			}
+
+			nav a {
+				font-size: 0.8rem;
+			}
+
+			.hero {
+				padding: 80px 20px 60px;
+			}
+
+			section {
+				padding: 60px 20px;
+			}
+
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		/* Smooth Fade In */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		section {
+			animation: fadeIn 0.6s ease-out;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav>
+		<div class="nav-content">
+			<div class="logo">Portfólio Acadêmico</div>
+			<ul>
+				<li><a href="#sobre">Sobre</a></li>
+				<li><a href="#formacao">Formação</a></li>
+				<li><a href="#aulas">Aulas</a></li>
+				<li><a href="#reflexao">Reflexão Final</a></li>
+				<li><a href="#contato">Contato</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Hero -->
+	<div class="hero">
+		<p class="welcome">Bem-vindo ao</p>
+		<h1>Redes de Computadores</h1>
+		<p class="subtitle">Registro do processo de aprendizagem</p>
+		<p class="author">Software Engineer</p>
+	</div>
+
+	<!-- Sobre -->
+	<section id="sobre">
+		<h2>Marcos V. M Arruda</h2>
+		<p style="text-align: center; max-width: 700px; margin: 0 auto;">
+			Estudante de Engenharia de Software. Atualmente, atuo como Suporte em Audiovisual pela
+			Faculdade UniCatólica. No tempo livre, gamer casual e músico.
+		</p>
+		<div class="tags" style="justify-content: center; margin-top: 24px;">
+			<span class="tag"></span>
+			<span class="tag"></span>
+			<span class="tag"></span>
+			<span class="tag"></span>
+		</div>
+	</section>
+
+	<div class="divider"></div>
+
+	<!-- Formação -->
+	<section id="formacao">
+		<h2>Minha Formação</h2>
+		<div class="grid">
+			<div class="card">
+				<h4>Formação</h4>
+				<ul>
+					<li>Bacharelado em Engenharia de Software, Cursando</li>
+					<li>Tech Lead, 2025</li>
+					<li>Técnico em Informática, 2021</li>
+					<li>Manutenção e Computadores, 2017</li>
+				</ul>
+			</div>
+			<div class="card">
+				<h4>Experiência Profissional</h4>
+				<ul>
+					<li>Auxiliar em Audiovisual, 2023 - atual</li>
+					<li>Consultor de Vendas, 2023 - 2023</li>
+					<li>Jovem Aprendiz em Vendas, 2022 - 2023</li>
+					<li>Jovem Aprendiz em Suporte Técnico em Redes, 2022 - 2022</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="divider"></div>
+
+	<!-- Aulas -->
+	<section id="aulas">
+		<h2>Registro de Aulas</h2>
+		<p style="text-align: center; max-width: 700px; margin: 0 auto 48px;">
+			Aprendizados ao longo da disciplina de Redes de Computadores.
+		</p>
+
+		<div class="timeline">
+			<div class="timeline-item">
+				<h4>Aula 1 · Friends of Figma</h4>
+				<div class="date">FOF Palmas</div>
+				<p>Na primeira aula de Redes de Computadores, não estive presente, pois ocorreu mais uma edição do FOF
+					Palmas em parceria com a LAES, com a palestra do Juno, que trouxe diversos insights sobre as
+					atualizações do Figma e sua um pouco sobre sua história pessoal.</p>
+				<p>Apesar disso, não deixei de acompanhar os conteúdos da disciplina. Realizei consultas com meus
+					colegas que estavam presentes, fiquei a par de tudo que foi ministrado na sala de aula, dos métodos
+					de avaliação e também dos conceitos iniciais sobre a internet.</p>
+				<img src="images/image2.png" alt="Friends of Figma - FOF Palmas" class="timeline-img">
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 2 · Conceitos de Redes</h4>
+				<div class="date">Infraestrutura de Redes</div>
+
+				<p><strong>Entidades reguladoras e padrões mundiais:</strong></p>
+				<ul>
+					<li><strong>IANA:</strong> Responsável pela coordenação global de endereços IP, números de sistemas
+						autônomos e outros parâmetros essenciais para a Internet.</li>
+					<li><strong>CGI.br:</strong> Comitê Gestor da Internet no Brasil, que define diretrizes estratégicas
+						para o uso e desenvolvimento da Internet no país.</li>
+					<li><strong>NIC.br:</strong> Entidade que executa as decisões do CGI.br, cuidando de registros de
+						domínios ".br" e administração técnica da Internet no Brasil.</li>
+					<li><strong>CERT.br:</strong> Centro de Estudos, Resposta e Tratamento de Incidentes de Segurança no
+						Brasil.</li>
+				</ul>
+
+				<p><strong>Modos de envio de dados:</strong></p>
+				<ul>
+					<li><strong>Broadcast:</strong> Envio de dados para todos os dispositivos de uma rede.</li>
+					<li><strong>Unicast:</strong> Envio de dados para um único destinatário específico.</li>
+					<li><strong>Multicast:</strong> Envio de dados para um grupo selecionado de dispositivos.</li>
+				</ul>
+
+				<p><strong>Endereços e identificação:</strong></p>
+				<ul>
+					<li><strong>Endereço MAC:</strong> Identificação física única de cada dispositivo na rede.</li>
+					<li><strong>Endereço IP:</strong> Identificação lógica usada para localizar dispositivos na rede.
+					</li>
+					<li><strong>IP público:</strong> Visível na Internet, usado para comunicação externa.</li>
+					<li><strong>IP privado:</strong> Usado apenas dentro de redes internas.</li>
+				</ul>
+
+				<p><strong>Equipamentos:</strong></p>
+				<p>Switch: Conecta dispositivos em uma rede local e encaminha pacotes para o destino correto usando o
+					endereço MAC.</p>
+
+				<p><strong>Monitoramento e segurança:</strong></p>
+				<ul>
+					<li>ICMP: Protocolo usado para diagnóstico e controle (ex.: comando ping).</li>
+					<li>Ping da morte: Ataque que envia pacotes ICMP malformados para travar ou sobrecarregar um
+						sistema.</li>
+					<li>Princípios de segurança de rede: Confidencialidade, integridade, disponibilidade, autenticação e
+						não-repúdio.</li>
+				</ul>
+
+				<p><strong>Protocolos e infraestrutura:</strong></p>
+				<ul>
+					<li>Principais protocolos: HTTP, HTTPS, FTP, SMTP, DNS</li>
+					<li><strong>Backbone:</strong> Estrutura principal de conexão de alto desempenho que interliga redes
+						e ISPs.</li>
+					<li><strong>ISP:</strong> Provedores de serviços de Internet.</li>
+				</ul>
+
+				<p><strong>Classificação das redes:</strong> LAN (local), MAN (metropolitana), WAN (longa distância),
+					PAN (pessoal).</p>
+				<p><strong>Topologias:</strong> Barramento, estrela, anel, malha, híbrida.</p>
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 3 · Arquitetura em Camadas</h4>
+				<div class="date">Modelo OSI e TCP/IP</div>
+				<p>Entendi que a organização em camadas permite isolar funções, facilitar a manutenção e garantir
+					interoperabilidade entre diferentes tecnologias e fabricantes. Também explorei conceitos como
+					transmissão de pacotes, atrasos e perdas de dados, além da importância da padronização dos serviços
+					de rede para o funcionamento da Internet.</p>
+
+				<p><strong>Tópicos abordados:</strong></p>
+				<ul>
+					<li><strong>Arquitetura em camadas:</strong> Entendimento de como cada camada implementa um serviço
+						e transfere dados até o meio físico.</li>
+					<li><strong>Protocolos de comunicação:</strong> Estudo dos acordos que regem a troca de informações,
+						permitindo que diferentes máquinas "falem a mesma língua".</li>
+					<li><strong>Protocolos principais:</strong> TCP e UDP (transporte), IP (rede), HTTP, FTP, SMTP, DNS
+						(aplicação), CSMA/CD, CSMA/CA (enlace).</li>
+					<li><strong>Atrasos e perdas de pacotes:</strong> Compreensão de fatores que afetam o desempenho da
+						rede, como velocidade de transmissão, taxa de tráfego e congestionamento.</li>
+					<li><strong>Padronização e interoperabilidade:</strong> Importância de normas e modelos abertos para
+						garantir comunicação global eficiente.</li>
+				</ul>
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 4 · Comandos de Rede</h4>
+				<div class="date">Atividade Prática/Teórica</div>
+				<p>Durante essa atividade pratiquei diversos comandos de rede diretamente no terminal, com o objetivo de
+					compreender como ocorre a comunicação entre dispositivos em uma rede local e na internet.</p>
+
+				<p>Aprendi a identificar e interpretar as configurações de interface de rede utilizando o comando
+					<code>ipconfig</code> (Windows) e <code>ifconfig</code> (Linux), entendendo o papel do endereço IP,
+					gateway padrão, máscara de rede e fabricante da placa de rede.
+				</p>
+
+				<p>Também explorei o comando <code>ping</code>, analisando como o protocolo ICMP verifica a
+					conectividade entre hosts e o significado de parâmetros como TTL e jitter, essenciais para avaliar a
+					qualidade da conexão.</p>
+
+				<p>Na camada de transporte, usei o comando <code>netstat</code> para observar conexões ativas, portas
+					utilizadas e estados de conexão, compreendendo como essas informações são úteis para diagnóstico e
+					segurança de redes.</p>
+
+				<p>Por fim, explorei a camada de aplicação com o comando <code>nslookup</code>, identificando nomes de
+					domínio e endereços IP associados, reforçando o entendimento sobre o funcionamento do DNS.</p>
+
+				<p>Essa atividade me proporcionou uma visão prática e integrada sobre o funcionamento das redes de
+					computadores, desenvolvendo minha capacidade de diagnosticar problemas de conexão, interpretar rotas
+					e protocolos, e compreender como as camadas do modelo TCP/IP se relacionam na comunicação entre
+					sistemas.</p>
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 5 · Cisco Packet Tracer</h4>
+				<div class="date">Simulação de Redes</div>
+				<p>Durante esta atividade, aprendi a utilizar o Cisco Packet Tracer, uma ferramenta de simulação de
+					redes da Cisco que permite configurar e testar topologias de rede sem a necessidade de equipamentos
+					físicos. Com isso, desenvolvi uma melhor compreensão sobre endereçamento IP, máscara de rede,
+					configuração de dispositivos e testes de conectividade (ping).</p>
+
+				<p>Montei e configurei redes simples e intermediárias utilizando PCs, notebooks, impressoras, switches,
+					roteadores e servidores. Também aprendi a configurar serviços como HTTP, FTP, DNS e DHCP, além de
+					simular redes wireless com diferentes dispositivos.</p>
+
+				<p>Essa prática me ajudou a entender, de forma visual e interativa, como ocorre a comunicação entre
+					dispositivos em uma rede local (LAN), e como cada elemento é essencial para o funcionamento de um
+					ambiente de rede real. Com essa experiência, desenvolvi habilidades importantes como resolução de
+					problemas, pensamento lógico, configuração de topologias e análise de conectividade fundamentais
+					para um futuro profissional na área de redes e infraestrutura.</p>
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 6 · Pesquisa Científica</h4>
+				<div class="date">Palestra Acadêmica</div>
+				<p>Nesta quarta-feira, 10/10/2025, nossa dinâmica foi uma palestra sobre o tema da pesquisa científica.
+					Foram discutidos os benefícios de realizar esse tipo de projeto e a experiência de um aluno que
+					deseja se envolver nessas práticas no ambiente acadêmico.</p>
+				<p>Pessoalmente, achei muito interessante; as informações foram valiosas para o nosso processo
+					acadêmico, e o palestrante fez uma apresentação excelente.</p>
+				<img src="images/image17.png" alt="Palestra sobre Pesquisa Científica" class="timeline-img">
+				<img src="images/image18.png" alt="Palestra sobre Pesquisa Científica - Apresentação"
+					class="timeline-img">
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 7 · Roteamento e Revisão Prática</h4>
+				<div class="date">Endereçamento e Roteamento IP</div>
+				<p>Nesta aula, o foco foi consolidar a base de endereçamento e introduzir a lógica de como as redes se
+					conectam globalmente. Iniciamos com uma revisão prática de <strong>Cálculo de Sub-redes</strong>,
+					onde reforcei o entendimento sobre a conversão binária da máscara para identificar o range de hosts
+					válidos e a segmentação da rede.</p>
+
+				<p><strong>Infraestrutura Física e Simulação</strong></p>
+				<p>No contexto do Packet Tracer, esclareci as diferenças de cabeamento fundamentais para a montagem de
+					laboratórios:</p>
+				<ul>
+					<li><strong>Cabo Direto (Straight-Through):</strong> Aprendi que deve ser usado para conectar
+						dispositivos de camadas diferentes, como Switch para Host.</li>
+					<li><strong>Cabo Crossover:</strong> Utilizado para conectar dispositivos iguais, como Switch para
+						Switch ou Roteador para Roteador.</li>
+				</ul>
+				<p>Também revisamos as topologias e o conceito de domínio de colisão em Hubs vs. Switches.</p>
+
+				<p><strong>Introdução ao Roteamento IP</strong></p>
+				<p>Aprofundei-me no papel do Roteador, entendendo que ele não apenas repassa dados, mas toma decisões
+					para escolher a "melhor rota" até o destino final baseando-se em métricas (como retardo ou
+					confiabilidade).</p>
+
+				<p>Refleti sobre as duas estratégias principais de gerenciamento dessas rotas:</p>
+				<ul>
+					<li><strong>Roteamento Estático:</strong> Configurado manualmente pelo administrador. É seguro e
+						ideal para redes pequenas e estáveis, mas não escala bem pois exige manutenção manual a cada
+						mudança.</li>
+					<li><strong>Roteamento Dinâmico:</strong> Utiliza protocolos para atualizar rotas automaticamente. É
+						mais rápido, confiável e se adapta sozinho a falhas na rede, sendo essencial para redes
+						complexas.</li>
+				</ul>
+
+				<p>Por fim, tive o primeiro contato teórico com os protocolos que gerenciam essa dinâmica, como o
+					<strong>RIP, OSPF e BGP</strong>.
+				</p>
+			</div>
+
+			<div class="timeline-item">
+				<h4>Aula 8 · Fundamentos de Segurança da Informação</h4>
+				<div class="date">Gestão de Riscos e Proteção</div>
+				<p>Nesta aula, iniciamos os estudos sobre Segurança da Informação, desmistificando a ideia de que existe
+					proteção total. Aprendi que a segurança <strong>não é um estado absoluto</strong>, mas sim um
+					processo contínuo de gerenciamento de riscos e economia, onde as defesas devem ser organizadas em
+					camadas para dificultar ataques.</p>
+
+				<p><strong>Normas e Planejamento</strong></p>
+				<p>Fui apresentado às normas <strong>ISO 27000</strong> (como a 27001 e 27002), que estabelecem
+					vocabulário, requisitos e boas práticas para a implementação de um Sistema de Gestão de Segurança da
+					Informação (SGSI). Entendi que planejar a segurança envolve princípios como "privilégio mínimo" (não
+					dar mais acesso do que o necessário) e a integração da segurança desde o início do projeto.</p>
+
+				<p><strong>Pilares da Segurança</strong></p>
+				<p>Refleti sobre os cinco princípios essenciais que sustentam a proteção de dados:</p>
+				<ul>
+					<li><strong>Confidencialidade, Integridade e Disponibilidade (C.I.D.):</strong> A base clássica para
+						garantir que a informação seja acessada apenas por quem tem direito, não seja alterada
+						indevidamente e esteja acessível quando necessário.</li>
+					<li><strong>Autenticidade e Responsabilização (Não Repúdio):</strong> Garantir a identidade de quem
+						acessa e impedir que alguém negue a autoria de uma ação.</li>
+				</ul>
+
+				<p><strong>Gestão de Riscos e Vulnerabilidades</strong></p>
+				<p>Compreendi a relação entre <strong>Ativos</strong> (o que tem valor para a empresa, como hardware,
+					software e pessoas), <strong>Ameaças</strong> (naturais ou intencionais) e
+					<strong>Vulnerabilidades</strong> (fraquezas físicas, de software ou humanas). O processo de gestão
+					de vulnerabilidades é cíclico: identificar, classificar, avaliar e corrigir.
+				</p>
+
+				<p><strong>Mecanismos de Controle</strong></p>
+				<ul>
+					<li><strong>Controles Lógicos:</strong> Uso de Firewalls, Criptografia (SSL, Bitlocker),
+						Autenticação de Múltiplos Fatores (MFA) e Detecção de Intrusão (Snort).</li>
+					<li><strong>Controles Físicos:</strong> Barreiras tangíveis como catracas, biometria, vigilância por
+						câmeras e medidas anti-incêndio.</li>
+				</ul>
+			</div>
+
+			<div class="timeline-item">
+				<h4>Menções · Palestras e Convidados</h4>
+				<div class="date">Profissionais da Área</div>
+
+				<p><strong>29/10 - Guilherme Carvalho</strong></p>
+				<p>No dia 29/10, tivemos a presença de um convidado, <strong>Guilherme Carvalho</strong>, egresso da
+					instituição, que atua na área de redes. Ele compartilhou um pouco de seus conhecimentos, aliás, é um
+					excelente comunicador! Ensina muito bem e, na minha opinião, se daria muito bem como professor na
+					área.</p>
+
+				<p><strong>05/11 - Patricio</strong></p>
+				<p>Já no dia 05/11, recebemos em sala o profissional <strong>Patricio</strong> (chefe do meu colega),
+					que trouxe sua experiência na área de infraestrutura. Particularmente, gostei demais da palestra:
+					foi muito aprendizado e achei interessante a forma como ele explicava. Outro que, na minha opinião,
+					poderia fazer parte do quadro de professores do curso de Engenharia de Software.</p>
+				<img src="images/image20.jpeg" alt="Palestra com Patricio - Infraestrutura" class="timeline-img">
+			</div>
+		</div>
+	</section>
+
+	<div class="divider"></div>
+
+	<!-- Reflexão Final -->
+	<section id="reflexao">
+		<h2>Reflexão Final e Autoavaliação</h2>
+		<p style="text-align: center; max-width: 800px; margin: 0 auto 48px; font-size: 1.1rem;">
+			Chegando ao fim da disciplina de Redes de Computadores, e analisando não apenas o conteúdo técnico
+			absorvido, mas como esse processo contribuiu para minha formação como Engenheiro de Software.
+		</p>
+
+		<div style="max-width: 800px; margin: 0 auto;">
+			<h3 style="margin-top: 40px; margin-bottom: 16px;">Sobre a Jornada de Aprendizagem</h3>
+			<p>A dinâmica das aulas, mesclando a teoria (como o Modelo OSI) com a prática visual (Cisco Packet Tracer),
+				foi essencial. Confesso que, inicialmente, redes pode parecer um tema abstrato, mas as simulações
+				tornaram os conceitos "palpáveis".</p>
+
+			<p>Um ponto alto foi a oportunidade de ouvir profissionais atuantes no mercado, como o Guilherme e o
+				Patricio. Ver a teoria sendo aplicada no dia a dia de grandes infraestruturas mudou minha percepção
+				sobre a importância da disciplina. Mesmo quando precisei me ausentar (como na aula inaugural durante o
+				FOF Palmas), mantive o compromisso de buscar o conteúdo com colegas, para que nenhum conteúdo ficasse
+				para trás.</p>
+
+			<h3 style="margin-top: 40px; margin-bottom: 16px;">Estudos Individuais e Desafios</h3>
+			<p>Meu estudo individual foi focado na prática. Percebi que apenas ler os slides não era suficiente para
+				fixar conceitos como o <strong>Cálculo de Sub-redes</strong>, que foi, sem dúvida, meu maior desafio
+				técnico. A matemática binária e a lógica de segmentação exigiram que eu me dedicasse mais, refazendo
+				exercícios até entender a lógica por trás da máscara de rede.</p>
+
+			<p>Outra dificuldade foi entender a questão de <strong>protocolos de segurança</strong>. A solução foi
+				organizar o conhecimento em "camadas", assim como o modelo de rede, estudando um tópico de cada vez para
+				não me sobrecarregar.</p>
+
+			<h3 style="margin-top: 40px; margin-bottom: 16px;">A Construção do Portfólio</h3>
+			<p>A organização deste portfólio foi, por si só, uma ferramenta de estudo. Ao ter que sintetizar as aulas e
+				transcrever o que aprendi para uma linguagem clara no site, acabei revisando e fixando o conteúdo. Optar
+				por desenvolver o portfólio em código (HTML/CSS) em vez de usar ferramentas prontas foi uma escolha
+				proposital para aprender e entender sobre o conceito básico de uma aplicação web, e dando uma melhor
+				base para aprender sobre desenvolvimento para web.</p>
+
+			<h3 style="margin-top: 40px; margin-bottom: 16px;">Conexão com o Projeto de Vida</h3>
+			<p>Como futuro Engenheiro de Software e almejando a posição de Tech Lead, entendo agora que <strong>não
+					existe software robusto sem uma rede confiável</strong>. Compreender latência, protocolos (TCP/UDP),
+				segurança e como os dados trafegam é o que diferencia um desenvolvedor que apenas "faz código" de um que
+				entende a arquitetura completa da solução.</p>
+
+			<p>Saio desta disciplina com a certeza de que a infraestrutura é o alicerce onde minhas futuras aplicações
+				irão rodar, e saber dialogar com a equipe de redes será um diferencial na minha carreira.</p>
+		</div>
+	</section>
+
+	<div class="divider"></div>
+
+	<!-- Contato -->
+	<footer id="contato">
+		<h3>Vamos conversar?</h3>
+		<p style="color: var(--text-secondary); margin-bottom: 12px;">Entre em contato comigo</p>
+		<div class="contact-info">
+			<a href="mailto:marcos.varruda@a.catolica.to.edu.br">📧 marcos.varruda@a.catolica.to.edu.br</a>
+			<a href="tel:+5537999680016">📱 (37) 99968-0016</a>
+		</div>
+		<p style="margin-top: 48px; color: var(--text-secondary); font-size: 0.9rem;">
+			© 2025 Marcos V. M Arruda · Portfólio Acadêmico
+		</p>
+	</footer>
+
+</body>
+
+</html>
